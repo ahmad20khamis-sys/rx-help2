@@ -22,7 +22,17 @@ export async function POST(req: Request) {
   const supabase = db();
 
   const up = await supabase.storage.from(BUCKET).upload(path, Buffer.from(await file.arrayBuffer()), { contentType: file.type });
-  if (up.error) { console.error(up.error); return fail("Could not save the image. Try again.", 500); }
+  if (up.error) {
+  console.error("SUPABASE UPLOAD ERROR:", up.error);
+
+  return NextResponse.json(
+    {
+      error: "SUPABASE_UPLOAD_ERROR",
+      details: up.error.message,
+    },
+    { status: 500 }
+  );
+}
 
   const { data, error } = await supabase
     .from("submissions").insert({ sender_name: name, note, image_path: path }).select("id").single();
