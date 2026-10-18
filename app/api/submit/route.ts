@@ -27,8 +27,7 @@ export async function POST(req: Request) {
 
   return NextResponse.json(
     {
-      error: "SUPABASE_UPLOAD_ERROR",
-      details: up.error.message,
+     error: up.error.message
     },
     { status: 500 }
   );
