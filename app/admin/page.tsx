@@ -40,7 +40,7 @@ export default async function Dashboard({ searchParams }: { searchParams: { stat
           <li key={r.id}>
             <Link href={`/admin/${r.id}`} className="flex gap-4 rounded-xl border border-line bg-white p-3 hover:border-rx">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={urlFor.get(r.image_path)} alt="" className="h-24 w-24 shrink-0 rounded-lg bg-paper object-cover" />
+              <img src={urlFor.get(r.image_path) || ""} alt="" className="h-24 w-24 shrink-0 rounded-lg bg-paper object-cover" />
               <div className="min-w-0 flex-1">
                 <div className="flex items-start justify-between gap-2">
                   <p className="truncate font-bold">{r.sender_name}</p>
